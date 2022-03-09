@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sonnen_rennt/constants/Theme.dart';
 import 'package:sonnen_rennt/constants/color.dart';
 
 class CardHorizontal extends StatelessWidget {

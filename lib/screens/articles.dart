@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sonnen_rennt/constants/Theme.dart';
 import 'package:sonnen_rennt/constants/color.dart';
-
-//screens
-// import 'package:sonnen_rennt/screens/product.dart';
-// import 'package:sonnen_rennt/screens/category.dart';
 
 //widgets
 import 'package:sonnen_rennt/widgets/drawer.dart';

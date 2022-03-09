@@ -11,7 +11,6 @@ import 'package:sonnen_rennt/structs/auth.dart';
 import 'package:sonnen_rennt/widgets/utils/waiting.dart';
 
 
-
 class LoginScreen extends StatefulWidget {
 
   LoginScreen({this.refreshAuthStatusCallback});

@@ -3,8 +3,6 @@ import 'package:sonnen_rennt/constants/color.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'package:sonnen_rennt/constants/Theme.dart';
-
 import 'package:sonnen_rennt/widgets/drawer-tile.dart';
 
 class NowDrawer extends StatelessWidget {

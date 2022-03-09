@@ -2,10 +2,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:sonnen_rennt/api/api.dart';
 import 'package:sonnen_rennt/api/run.dart';
-import 'package:sonnen_rennt/constants/Theme.dart';
 import 'package:sonnen_rennt/constants/color.dart';
 import 'package:sonnen_rennt/structs/run.dart';
 import 'package:sonnen_rennt/widgets/sunrun_base.dart';

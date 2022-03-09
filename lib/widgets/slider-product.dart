@@ -2,7 +2,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-import 'package:sonnen_rennt/constants/Theme.dart';
 import 'package:sonnen_rennt/constants/color.dart';
 
 class ProductCarousel extends StatefulWidget {

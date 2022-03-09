@@ -1,7 +1,6 @@
 
 
 import 'package:sonnen_rennt/structs/group.dart';
-import 'package:sonnen_rennt/structs/route.dart';
 
 enum GroupDetailResultType {
   UNKNOWN_ERROR,

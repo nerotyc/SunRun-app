@@ -2,7 +2,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:multiselect_formfield/multiselect_formfield.dart';
 import 'package:sonnen_rennt/api/api.dart';
 import 'package:sonnen_rennt/api/group.dart';
 import 'package:sonnen_rennt/api/route.dart';
