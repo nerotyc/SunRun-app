@@ -8,7 +8,7 @@ class SrErrorWidget extends SrNotificationBaseWidget {
 
   SrErrorWidget({
     String title = "Fehler",
-    String description = "Unspezifierter Fehler",
+    String? description = "Unspezifierter Fehler",
     SrNotificationWidgetSize size = SrNotificationWidgetSize.LARGE,
     bool fillWindow = false,
   }) : super(

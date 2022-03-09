@@ -15,8 +15,8 @@ class Components extends StatefulWidget {
 }
 
 class _ComponentsState extends State<Components> {
-  bool switchValueOne;
-  bool switchValueTwo;
+  late bool switchValueOne;
+  late bool switchValueTwo;
 
   void initState() {
     setState(() {

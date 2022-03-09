@@ -16,8 +16,8 @@ class RunDeleteScreen extends StatefulWidget {
 
   RunDeleteScreen({this.refreshAuthStatusCallback, this.runId});
 
-  Function refreshAuthStatusCallback = (){};
-  int runId;
+  Function? refreshAuthStatusCallback = (){};
+  int? runId;
 
   @override
   _RunDeleteScreenState createState() => _RunDeleteScreenState(
@@ -31,13 +31,13 @@ class _RunDeleteScreenState extends State<RunDeleteScreen> {
 
   _RunDeleteScreenState({this.refreshAuthStatusCallback, this.runId});
 
-  Function refreshAuthStatusCallback = (){};
-  int runId;
+  Function? refreshAuthStatusCallback = (){};
+  int? runId;
 
   bool _waiting = false;
-  StreamController _streamController;
-  StreamSink _streamSink;
-  Stream _streamOut;
+  late StreamController _streamController;
+  late StreamSink _streamSink;
+  Stream? _streamOut;
 
   @override
   void initState() {
@@ -77,9 +77,9 @@ class _RunDeleteScreenState extends State<RunDeleteScreen> {
             future: RunApi.runDetail(runId),
             builder: (context, AsyncSnapshot<RunDetailResult> snap) {
               if(snap.hasError ||
-                  (snap.hasData && snap.data.type != RunDetailResultType.SUCCESS_200)) {
+                  (snap.hasData && snap.data!.type != RunDetailResultType.SUCCESS_200)) {
                 return SrErrorWidget(
-                  description: snap.data.detail,
+                  description: snap.data!.detail,
                 );
               }
 
@@ -87,8 +87,8 @@ class _RunDeleteScreenState extends State<RunDeleteScreen> {
                 return SrWaitingWidget();
               }
 
-              if(snap.hasData && snap.data.type == RunDetailResultType.SUCCESS_200) {
-                Run run = snap.data.run;
+              if(snap.hasData && snap.data!.type == RunDetailResultType.SUCCESS_200) {
+                Run run = snap.data!.run!;
 
                 return Container(
                   margin: EdgeInsets.only(bottom: 12.0, top: 24.0),
@@ -148,7 +148,7 @@ class _RunDeleteScreenState extends State<RunDeleteScreen> {
                                 Navigator.of(context).pop();
                               } else {
                                 final snackBar = SnackBar(
-                                  content: Text("Error: " + res.detail,
+                                  content: Text("Error: " + res.detail!,
                                       style: TextStyle(color: Colors.white)
                                   ),
                                 );

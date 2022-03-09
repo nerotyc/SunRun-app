@@ -1,13 +1,14 @@
 
 import 'dart:async';
 
-import 'package:dropdownfield/dropdownfield.dart';
 import 'package:flutter/material.dart';
+import 'package:multiselect_formfield/multiselect_formfield.dart';
 import 'package:sonnen_rennt/api/api.dart';
 import 'package:sonnen_rennt/api/group.dart';
 import 'package:sonnen_rennt/api/route.dart';
 import 'package:sonnen_rennt/api/run.dart';
 import 'package:sonnen_rennt/constants/color.dart';
+import 'package:sonnen_rennt/extern/dropdownfield2.dart';
 import 'package:sonnen_rennt/screens/run/run_created.dart';
 import 'package:sonnen_rennt/structs/group.dart';
 import 'package:sonnen_rennt/structs/route.dart';
@@ -34,16 +35,16 @@ class _RunCreateScreenState extends State<RunCreateScreen> {
   String _elevation_str = "";
   RunType _type = RunType.RUN;
   double _distance = 0, _elevation_gain = 0;
-  String _group_str = null;
-  String _route_str = null;
+  String? _group_str = null;
+  String? _route_str = null;
   Duration _duration = Duration(minutes: 5);
   DateTime _timeStart = DateTime.now();
   String _note = "";
 
   bool _waiting = false;
-  StreamController _streamController;
-  StreamSink _streamSink;
-  Stream _streamOut;
+  late StreamController _streamController;
+  late StreamSink _streamSink;
+  Stream? _streamOut;
 
   void _clickCreate() async {
     if(_waiting) return;
@@ -51,17 +52,17 @@ class _RunCreateScreenState extends State<RunCreateScreen> {
     _waiting = true;
     _streamSink.add(true);
 
-    if (_formKey.currentState.validate()) {
-      int routeId;
-      int groupId;
+    if (_formKey.currentState!.validate()) {
+      int? routeId;
+      int? groupId;
 
       if(_route_str != null) {
-        String routeIdStr = _route_str.split(":").first;
+        String routeIdStr = _route_str!.split(":").first;
         routeId = routeIdStr != null ? int.parse(routeIdStr) : null;
       }
 
       if(_group_str != null) {
-        String groupIdStr = _group_str.split(":").first;
+        String groupIdStr = _group_str!.split(":").first;
         groupId = groupIdStr != null ? int.parse(groupIdStr) : null;
       }
 
@@ -92,7 +93,7 @@ class _RunCreateScreenState extends State<RunCreateScreen> {
         Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => RunCreatedScreen()));
       } else {
         final snackBar = SnackBar(
-          content: Text("Error: " + res.detail,
+          content: Text("Error: " + res.detail!,
               style: TextStyle(color: Colors.white)
           ),
         );
@@ -174,12 +175,12 @@ class _RunCreateScreenState extends State<RunCreateScreen> {
                   'groupList': groupStringList,
                 };
               }),
-              builder: (context, snap) {
+              builder: (context, AsyncSnapshot<dynamic> snap) {
                 if(snap.hasError || (snap.hasData &&
                     (snap.data is String)
                 )) {
                   return SrErrorWidget(
-                    description: snap.data,
+                    description: snap.error.toString(),
                   );
                 }
 
@@ -248,10 +249,9 @@ class _RunCreateScreenState extends State<RunCreateScreen> {
                                     _distance = 0;
                                   }
                                   _distance_str = _distance.toString();
-                                  return value;
                                 },
                                 validator: (value) {
-                                  if  (_route_str != null && _route_str.isNotEmpty) {
+                                  if  (_route_str != null && _route_str!.isNotEmpty) {
                                     return null;
                                   }
                                   if (value == null || value.isEmpty) {
@@ -284,10 +284,8 @@ class _RunCreateScreenState extends State<RunCreateScreen> {
                               ),
                               SizedBox(height: 16,),
                               // -----
-
                               // MultiSelectFormField(
-                              //   // autovalidate: false,
-                              //   // d
+                              //   // autovalidate: AutovalidateMode.always,
                               //   chipBackGroundColor: Colors.red,
                               //   chipLabelStyle: TextStyle(fontWeight: FontWeight.bold),
                               //   dialogTextStyle: TextStyle(fontWeight: FontWeight.bold),
@@ -296,7 +294,7 @@ class _RunCreateScreenState extends State<RunCreateScreen> {
                               //   dialogShapeBorder: RoundedRectangleBorder(
                               //       borderRadius: BorderRadius.all(Radius.circular(12.0))),
                               //   title: Text(
-                              //     "Title Of Form",
+                              //     "Aktivitätstyp",
                               //     style: TextStyle(fontSize: 16),
                               //   ),
                               //   dataSource: Run.getRunTypeFormListMap(),
@@ -304,13 +302,14 @@ class _RunCreateScreenState extends State<RunCreateScreen> {
                               //   valueField: 'value',
                               //   okButtonLabel: 'OK',
                               //   cancelButtonLabel: 'Abbrechen',
-                              //   hintWidget: Text('Aktivitätstyp auswählen'),
-                              //   // initialValue: Run.stringType(type),
+                              //   hintWidget: Text('Typ auswählen...'),
+                              //   // initialValue: Run.stringType(_type),
                               //   onSaved: (value) {
-                              //     // type = Run.parseType(value);
-                              //     // return Run.stringType(type);
+                              //     _type = Run.parseType(value);
                               //   },
                               // ),
+                              // SizedBox(height: 16,),
+
                               TextFormField(
                                 controller: TextEditingController(text: _elevation_str),
                                 keyboardType: TextInputType.numberWithOptions(decimal: false, signed: false),

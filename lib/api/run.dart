@@ -39,10 +39,10 @@ class RunDetailResult {
     this.run = run;
   }
 
-  RunDetailResultType type;
-  String detail;
+  RunDetailResultType? type;
+  String? detail;
 
-  Run run;
+  Run? run;
 }
 
 enum RunCreateResultType {
@@ -78,7 +78,7 @@ class RunCreateResult {
     this.detail = detail;
   }
 
-  RunCreateResult.NOT_FOUND_404({ String detail = "Nicht gefunden!" }) {
+  RunCreateResult.NOT_FOUND_404({ String? detail = "Nicht gefunden!" }) {
     type = RunCreateResultType.NOT_FOUND_404;
     this.detail = detail;
   }
@@ -88,11 +88,11 @@ class RunCreateResult {
     this.id = run_id;
   }
 
-  RunCreateResultType type;
-  String code;
-  String detail;
+  RunCreateResultType? type;
+  String? code;
+  String? detail;
 
-  int id;
+  int? id;
 }
 
 enum RunEditResultType {
@@ -128,7 +128,7 @@ class RunEditResult {
     this.detail = detail;
   }
 
-  RunEditResult.NOT_FOUND_404({ String detail = "Nicht gefunden!" }) {
+  RunEditResult.NOT_FOUND_404({ String? detail = "Nicht gefunden!" }) {
     type = RunEditResultType.NOT_FOUND_404;
     this.detail = detail;
   }
@@ -138,11 +138,11 @@ class RunEditResult {
     this.id = run_id;
   }
 
-  RunEditResultType type;
-  String code;
-  String detail;
+  RunEditResultType? type;
+  String? code;
+  String? detail;
 
-  int id;
+  int? id;
 }
 
 enum RunDeleteResultType {
@@ -172,7 +172,7 @@ class RunDeleteResult {
     this.detail = detail;
   }
 
-  RunDeleteResult.NOT_FOUND_404({ String detail = "Nicht gefunden!" }) {
+  RunDeleteResult.NOT_FOUND_404({ String? detail = "Nicht gefunden!" }) {
     type = RunDeleteResultType.NOT_FOUND_404;
     this.detail = detail;
   }
@@ -181,9 +181,9 @@ class RunDeleteResult {
     type = RunDeleteResultType.SUCCESS_200;
   }
 
-  RunDeleteResultType type;
-  String code;
-  String detail;
+  RunDeleteResultType? type;
+  String? code;
+  String? detail;
 }
 
 enum RunListUserResultType {
@@ -217,9 +217,9 @@ class RunListUserResult {
     this.runs = runs;
   }
 
-  RunListUserResultType type;
-  String code;
-  String detail;
+  RunListUserResultType? type;
+  String? code;
+  String? detail;
 
-  List<Run> runs;
+  late List<Run> runs;
 }

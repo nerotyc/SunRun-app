@@ -9,9 +9,9 @@ class CardSquare extends StatelessWidget {
       this.tap = defaultFunc});
 
   final String cta;
-  final String img;
+  final String? img;
   final Function tap;
-  final String title;
+  final String? title;
 
   static void defaultFunc() {
     print("the function works!");
@@ -23,7 +23,7 @@ class CardSquare extends StatelessWidget {
         height: 250,
         width: null,
         child: GestureDetector(
-          onTap: tap,
+          onTap: tap as void Function()?,
           child: Card(
               elevation: 3,
               shadowColor: SunRunColors.muted.withOpacity(0.22),
@@ -40,7 +40,7 @@ class CardSquare extends StatelessWidget {
                                   topLeft: Radius.circular(4.0),
                                   topRight: Radius.circular(4.0)),
                               image: DecorationImage(
-                                image: NetworkImage(img),
+                                image: NetworkImage(img!),
                                 fit: BoxFit.cover,
                               )))),
                   Flexible(
@@ -52,7 +52,7 @@ class CardSquare extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(title,
+                            Text(title!,
                                 style: TextStyle(
                                     color: SunRunColors.text, fontSize: 12)),
                             Text(cta,

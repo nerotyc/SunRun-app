@@ -16,7 +16,7 @@ class LoginScreen extends StatefulWidget {
 
   LoginScreen({this.refreshAuthStatusCallback});
 
-  Function refreshAuthStatusCallback = (){};
+  Function? refreshAuthStatusCallback = (){};
 
   @override
   _LoginScreenState createState() => _LoginScreenState(
@@ -48,13 +48,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final _formKey = GlobalKey<FormState>();
 
-  Function refreshAuthStatusCallback = (){};
+  Function? refreshAuthStatusCallback = (){};
 
-  String _input_username, _input_password;
-  bool _storeLoginCredentials = false;
+  String? _input_username, _input_password;
+  bool? _storeLoginCredentials = false;
 
-  String _errorUsername = null;
-  String _errorPassword = null;
+  String? _errorUsername = null;
+  String? _errorPassword = null;
 
   bool _waiting = false;
   ObscuredText obscuredText = ObscuredText();
@@ -71,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
     try {
-      if (_formKey.currentState.validate()) {
+      if (_formKey.currentState!.validate()) {
         setState(() {
           _waiting = true;
         });
@@ -79,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
         if (result == true) {
           var secStorage = FlutterSecureStorage();
-          if (_storeLoginCredentials) {
+          if (_storeLoginCredentials!) {
             secStorage.write(key: "username", value: _input_username);
             secStorage.write(key: "password", value: _input_password);
           }
@@ -114,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
             );
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
           }
-          _formKey.currentState.validate();
+          _formKey.currentState!.validate();
         }
       }
     } on Exception {
@@ -259,7 +259,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                               },
                                               validator: (val) {
                                                 if(_errorUsername != null) {
-                                                  String err = _errorUsername;
+                                                  String? err = _errorUsername;
                                                   _errorUsername = null;
                                                   return err;
                                                 }
@@ -305,7 +305,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   },
                                                   validator: (val) {
                                                     if(_errorPassword != null) {
-                                                      String err = _errorPassword;
+                                                      String? err = _errorPassword;
                                                       _errorPassword = null;
                                                       return err;
                                                     }
@@ -362,7 +362,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 child: Checkbox(
                                                     checkColor: SunRunColors.djk_heading,
                                                     activeColor: SunRunColors.primary,
-                                                    onChanged: (bool newValue) =>
+                                                    onChanged: (bool? newValue) =>
                                                         setState(() =>
                                                         _storeLoginCredentials =
                                                             newValue),

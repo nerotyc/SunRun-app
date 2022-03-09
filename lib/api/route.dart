@@ -39,10 +39,10 @@ class RouteDetailResult {
     this.route = route;
   }
 
-  RouteDetailResultType type;
-  String detail;
+  RouteDetailResultType? type;
+  String? detail;
 
-  DJKRoute route;
+  DJKRoute? route;
 }
 
 enum RouteCreateResultType {
@@ -78,7 +78,7 @@ class RouteCreateResult {
     this.detail = detail;
   }
 
-  RouteCreateResult.NOT_FOUND_404({ String detail = "Nicht gefunden!" }) {
+  RouteCreateResult.NOT_FOUND_404({ String? detail = "Nicht gefunden!" }) {
     type = RouteCreateResultType.NOT_FOUND_404;
     this.detail = detail;
   }
@@ -88,11 +88,11 @@ class RouteCreateResult {
     this.id = route_id;
   }
 
-  RouteCreateResultType type;
-  String code;
-  String detail;
+  RouteCreateResultType? type;
+  String? code;
+  String? detail;
 
-  int id;
+  int? id;
 }
 
 enum RouteEditResultType {
@@ -128,7 +128,7 @@ class RouteEditResult {
     this.detail = detail;
   }
 
-  RouteEditResult.NOT_FOUND_404({ String detail = "Nicht gefunden!" }) {
+  RouteEditResult.NOT_FOUND_404({ String? detail = "Nicht gefunden!" }) {
     type = RouteEditResultType.NOT_FOUND_404;
     this.detail = detail;
   }
@@ -138,11 +138,11 @@ class RouteEditResult {
     this.id = route_id;
   }
 
-  RouteEditResultType type;
-  String code;
-  String detail;
+  RouteEditResultType? type;
+  String? code;
+  String? detail;
 
-  int id;
+  int? id;
 }
 
 enum RouteDeleteResultType {
@@ -172,7 +172,7 @@ class RouteDeleteResult {
     this.detail = detail;
   }
 
-  RouteDeleteResult.NOT_FOUND_404({ String detail = "Nicht gefunden!" }) {
+  RouteDeleteResult.NOT_FOUND_404({ String? detail = "Nicht gefunden!" }) {
     type = RouteDeleteResultType.NOT_FOUND_404;
     this.detail = detail;
   }
@@ -181,9 +181,9 @@ class RouteDeleteResult {
     type = RouteDeleteResultType.SUCCESS_200;
   }
 
-  RouteDeleteResultType type;
-  String code;
-  String detail;
+  RouteDeleteResultType? type;
+  String? code;
+  String? detail;
 }
 
 enum RouteListResultType {
@@ -217,9 +217,9 @@ class RouteListResult {
     this.routes = routes;
   }
 
-  RouteListResultType type;
-  String code;
-  String detail;
+  RouteListResultType? type;
+  String? code;
+  String? detail;
 
-  List<DJKRoute> routes;
+  late List<DJKRoute> routes;
 }

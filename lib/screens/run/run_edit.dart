@@ -1,13 +1,14 @@
 
 import 'dart:async';
 
-import 'package:dropdownfield/dropdownfield.dart';
 import 'package:flutter/material.dart';
+import 'package:multiselect_formfield/multiselect_formfield.dart';
 import 'package:sonnen_rennt/api/api.dart';
 import 'package:sonnen_rennt/api/group.dart';
 import 'package:sonnen_rennt/api/route.dart';
 import 'package:sonnen_rennt/api/run.dart';
 import 'package:sonnen_rennt/constants/color.dart';
+import 'package:sonnen_rennt/extern/dropdownfield2.dart';
 import 'package:sonnen_rennt/screens/run/run_created.dart';
 import 'package:sonnen_rennt/screens/run/run_edited.dart';
 import 'package:sonnen_rennt/structs/group.dart';
@@ -18,7 +19,6 @@ import 'package:sonnen_rennt/widgets/sunrun_base.dart';
 
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-import 'package:flutter_duration_picker/flutter_duration_picker.dart';
 import 'package:sonnen_rennt/widgets/utils/error.dart';
 import 'package:sonnen_rennt/widgets/utils/waiting.dart';
 
@@ -26,7 +26,7 @@ class RunEditScreen extends StatefulWidget {
 
   RunEditScreen({this.runId});
 
-  int runId;
+  int? runId;
 
   @override
   _RunEditScreenState createState() => _RunEditScreenState(
@@ -38,24 +38,24 @@ class _RunEditScreenState extends State<RunEditScreen> {
 
   _RunEditScreenState({this.runId});
 
-  int runId;
+  int? runId;
 
   final _formKey = GlobalKey<FormState>();
 
   String _distance_str = "";
   String _elevation_str = "";
-  RunType _type = RunType.RUN;
-  double _distance = 0, _elevation_gain = 0;
-  String _group_str = null;
-  String _route_str = null;
-  Duration _duration = Duration(minutes: 5);
-  DateTime _timeStart = DateTime.now();
-  String _note = "";
+  RunType? _type = RunType.RUN;
+  double? _distance = 0, _elevation_gain = 0;
+  String? _group_str = null;
+  String? _route_str = null;
+  Duration? _duration = Duration(minutes: 5);
+  DateTime? _timeStart = DateTime.now();
+  String? _note = "";
 
   bool _waiting = false;
-  StreamController _streamController;
-  StreamSink _streamSink;
-  Stream _streamOut;
+  late StreamController _streamController;
+  late StreamSink _streamSink;
+  Stream? _streamOut;
 
   void _clickEdit() async {
     if(_waiting) return;
@@ -63,17 +63,17 @@ class _RunEditScreenState extends State<RunEditScreen> {
     _waiting = true;
     _streamSink.add(true);
 
-    if (_formKey.currentState.validate()) {
-      int routeId;
-      int groupId;
+    if (_formKey.currentState!.validate()) {
+      int? routeId;
+      int? groupId;
 
       if(_route_str != null) {
-        String routeIdStr = _route_str.split(":").first;
+        String routeIdStr = _route_str!.split(":").first;
         routeId = routeIdStr != null ? int.parse(routeIdStr) : null;
       }
 
       if(_group_str != null) {
-        String groupIdStr = _group_str.split(":").first;
+        String groupIdStr = _group_str!.split(":").first;
         groupId = groupIdStr != null ? int.parse(groupIdStr) : null;
       }
 
@@ -84,7 +84,7 @@ class _RunEditScreenState extends State<RunEditScreen> {
       print("_time_start: " + _timeStart.toString());
       print("_duration: " + _duration.toString());
       print("_group: " + groupId.toString());
-      print("_note: " + _note);
+      print("_note: " + _note!);
 
       Run run = Run.createNew(
         id: runId,
@@ -105,7 +105,7 @@ class _RunEditScreenState extends State<RunEditScreen> {
         Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => RunEditedScreen()));
       } else {
         final snackBar = SnackBar(
-          content: Text("Error: " + res.detail,
+          content: Text("Error: " + res.detail!,
               style: TextStyle(color: Colors.white)
           ),
         );
@@ -174,7 +174,7 @@ class _RunEditScreenState extends State<RunEditScreen> {
               if (groupsResult.type != GroupListResultType.SUCCESS_200)
                 return groupsResult.detail;
 
-              Run run = runResult.run;
+              Run? run = runResult.run;
               List<DJKRoute> routeList = routesResult.routes;
               List<Group> groupList = groupsResult.groups;
 
@@ -194,19 +194,17 @@ class _RunEditScreenState extends State<RunEditScreen> {
                 'groupList': groupStringList,
               };
             }),
-            builder: (context, snap) {
-              if(snap.hasError || (snap.hasData &&
-                  (snap.data is String)
-              )) {
+            builder: (BuildContext context, AsyncSnapshot<dynamic> snap) {
+              if(snap.hasError || (snap.hasData && (snap.data is String))) {
                 return SrErrorWidget(
-                  description: snap.data,
+                  description: snap.error.toString(),
                 );
               }
 
               if (snap.connectionState == ConnectionState.waiting) {
                 return SrWaitingWidget();
               }
-              if(snap.hasData) {
+              if(snap.hasData && snap.data != null) {
                 Run run = snap.data['run'];
                 var routeList = snap.data['routeList'];
                 var groupList = snap.data['groupList'];
@@ -300,10 +298,9 @@ class _RunEditScreenState extends State<RunEditScreen> {
                                   _distance = 0;
                                 }
                                 _distance_str = _distance.toString();
-                                return value;
                               },
                               validator: (value) {
-                                if  (_route_str != null && _route_str.isNotEmpty) {
+                                if  (_route_str != null && _route_str!.isNotEmpty) {
                                   return null;
                                 }
                                 if (value == null || value.isEmpty) {
@@ -338,8 +335,7 @@ class _RunEditScreenState extends State<RunEditScreen> {
                             // -----
 
                             // MultiSelectFormField(
-                            //   // autovalidate: false,
-                            //   // d
+                            //   autovalidate: AutovalidateMode.always,
                             //   chipBackGroundColor: Colors.red,
                             //   chipLabelStyle: TextStyle(fontWeight: FontWeight.bold),
                             //   dialogTextStyle: TextStyle(fontWeight: FontWeight.bold),
@@ -348,7 +344,7 @@ class _RunEditScreenState extends State<RunEditScreen> {
                             //   dialogShapeBorder: RoundedRectangleBorder(
                             //       borderRadius: BorderRadius.all(Radius.circular(12.0))),
                             //   title: Text(
-                            //     "Title Of Form",
+                            //     "Aktivitätstyp",
                             //     style: TextStyle(fontSize: 16),
                             //   ),
                             //   dataSource: Run.getRunTypeFormListMap(),
@@ -356,13 +352,13 @@ class _RunEditScreenState extends State<RunEditScreen> {
                             //   valueField: 'value',
                             //   okButtonLabel: 'OK',
                             //   cancelButtonLabel: 'Abbrechen',
-                            //   hintWidget: Text('Aktivitätstyp auswählen'),
-                            //   // initialValue: Run.stringType(type),
+                            //   // initialValue: Run.stringType(_type),
                             //   onSaved: (value) {
-                            //     // type = Run.parseType(value);
-                            //     // return Run.stringType(type);
+                            //     _type = Run.parseType(value);
                             //   },
                             // ),
+                            // SizedBox(height: 16,),
+
                             TextFormField(
                               controller: TextEditingController(text: _elevation_str),
                               keyboardType: TextInputType.numberWithOptions(decimal: false, signed: false),

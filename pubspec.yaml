@@ -1,5 +1,5 @@
 name: sonnen_rennt
-description: A new Flutter project.
+description: mobile frontend for sunrun app.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
@@ -18,29 +18,29 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
 
-  http: ^0.12.0
+  http: ^0.13.4
 
-  font_awesome_flutter: ^8.8.1
-  scrollable_positioned_list: ^0.1.7
-  carousel_slider: ^2.2.1
-  url_launcher: ^5.5.2
-  flutter_secure_storage: ^4.1.0
+  font_awesome_flutter: ^9.2.0
+  scrollable_positioned_list: ^0.2.3
+  carousel_slider: ^4.0.0
+  url_launcher: ^6.0.20
+  flutter_secure_storage: ^5.0.2
   datetime_picker_formfield: ^2.0.0
-  flutter_duration_picker: ^1.0.4
-  multiselect_formfield: ^0.1.6
-  dropdownfield: ^1.0.3   # TODO update TextStyle color in dropdownelements, IconButtons color
-  flutter_launcher_icons: ^0.9.0
-  select_form_field: ^2.0.0
-  basic_utils: ^1.5.1
-  provider: ^5.0.0
+  duration_picker: ^1.1.0+1
+  multiselect_formfield: ^0.1.7
+#  dropdownfield2: ^1.0.6   # TODO tailored background color
+  flutter_launcher_icons: ^0.9.2
+  select_form_field: ^2.2.0
+  basic_utils: ^4.2.0
+  provider: ^6.0.2
 
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.4
 
 dev_dependencies:
   flutter_test:
@@ -67,24 +67,6 @@ flutter:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
-
-  assets:
-    - assets/imgs/onboarding-bg.png
-    - assets/imgs/android.png
-    - assets/imgs/ios.png
-    - assets/imgs/creative-tim.png
-    - assets/imgs/now-logo.png
-    - assets/imgs/register-bg.png
-    - assets/imgs/bg-profile.png
-    - assets/imgs/profile-img.jpg
-    - assets/imgs/album-1.jpg
-    - assets/imgs/album-2.jpg
-    - assets/imgs/album-3.jpg
-    - assets/imgs/album-4.jpg
-    - assets/imgs/album-5.jpg
-    - assets/imgs/album-6.jpg
-    - assets/imgs/onboarding-free.png
-    - assets/imgs/invision-white-slim.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

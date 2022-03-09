@@ -117,8 +117,8 @@ class Articles extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 16.0),
                     child: CardHorizontal(
                         cta: "View article",
-                        title: articlesCards["Ice Cream"]['title'],
-                        img: articlesCards["Ice Cream"]['image'],
+                        title: articlesCards["Ice Cream"]!['title'],
+                        img: articlesCards["Ice Cream"]!['image'],
                         tap: () {
                           Navigator.pushNamed(context, '/pro');
                         }),
@@ -128,15 +128,15 @@ class Articles extends StatelessWidget {
                     children: [
                       CardSmall(
                           cta: "View article",
-                          title: articlesCards["Makeup"]['title'],
-                          img: articlesCards["Makeup"]['image'],
+                          title: articlesCards["Makeup"]!['title'],
+                          img: articlesCards["Makeup"]!['image'],
                           tap: () {
                             Navigator.pushNamed(context, '/pro');
                           }),
                       CardSmall(
                           cta: "View article",
-                          title: articlesCards["Coffee"]['title'],
-                          img: articlesCards["Coffee"]['image'],
+                          title: articlesCards["Coffee"]!['title'],
+                          img: articlesCards["Coffee"]!['image'],
                           tap: () {
                             Navigator.pushNamed(context, '/pro');
                           })
@@ -145,16 +145,16 @@ class Articles extends StatelessWidget {
                   SizedBox(height: 8.0),
                   CardHorizontal(
                       cta: "View article",
-                      title: articlesCards["Fashion"]['title'],
-                      img: articlesCards["Fashion"]['image'],
+                      title: articlesCards["Fashion"]!['title'],
+                      img: articlesCards["Fashion"]!['image'],
                       tap: () {
                         Navigator.pushNamed(context, '/pro');
                       }),
                   SizedBox(height: 8.0),
                   CardSquare(
                       cta: "View article",
-                      title: articlesCards["Argon"]['title'],
-                      img: articlesCards["Argon"]['image'],
+                      title: articlesCards["Argon"]!['title'],
+                      img: articlesCards["Argon"]!['image'],
                       tap: () {
                         Navigator.pushNamed(context, '/pro');
                       }),
@@ -162,8 +162,8 @@ class Articles extends StatelessWidget {
                       tap: () {
                         Navigator.pushNamed(context, '/pro');
                       },
-                      title: articlesCards["Music"]["title"],
-                      img: articlesCards["Music"]["image"]),
+                      title: articlesCards["Music"]!["title"],
+                      img: articlesCards["Music"]!["image"]),
                   Padding(
                       padding: EdgeInsets.only(left: 25, right: 25, top: 32),
                       child: Row(
@@ -252,7 +252,7 @@ class Articles extends StatelessWidget {
                           )),
                         ]),
                   ),
-                  ProductCarousel(imgArray: articlesCards["Music"]["products"]),
+                  ProductCarousel(imgArray: articlesCards["Music"]!["products"]),
                 ],
               ),
             )));

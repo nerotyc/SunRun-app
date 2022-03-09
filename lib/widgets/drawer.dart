@@ -8,7 +8,7 @@ import 'package:sonnen_rennt/constants/Theme.dart';
 import 'package:sonnen_rennt/widgets/drawer-tile.dart';
 
 class NowDrawer extends StatelessWidget {
-  final String currentPage;
+  final String? currentPage;
 
   NowDrawer({this.currentPage});
 

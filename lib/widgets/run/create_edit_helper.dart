@@ -2,8 +2,8 @@
 
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_duration_picker/flutter_duration_picker.dart';
 import 'package:sonnen_rennt/structs/run.dart';
+import 'package:duration_picker/duration_picker.dart';
 
 import 'package:intl/intl.dart';
 
@@ -11,8 +11,8 @@ class RadioTileGroupWidget extends StatefulWidget {
 
   RadioTileGroupWidget({this.value, this.setGlobalType});
 
-  RunType value;
-  Function setGlobalType;
+  RunType? value;
+  Function? setGlobalType;
 
   @override
   _RadioTileGroupWidgetState createState() => _RadioTileGroupWidgetState(
@@ -25,13 +25,13 @@ class _RadioTileGroupWidgetState extends State<RadioTileGroupWidget> {
 
   _RadioTileGroupWidgetState({this.value, this.setGlobalType});
 
-  RunType value;
-  Function setGlobalType;
+  RunType? value;
+  Function? setGlobalType;
 
   void setLocalType(RunType type) {
     value = type;
     setState(() {
-      setGlobalType(type);
+      setGlobalType!(type);
     });
   }
 
@@ -74,27 +74,27 @@ class RadioTileWidget extends StatelessWidget {
 
   RadioTileWidget({this.type, this.globalType, this.setGlobalType});
 
-  RunType type, globalType;
-  Function setGlobalType = () {};
+  RunType? type, globalType;
+  Function? setGlobalType = () {};
 
   @override
   Widget build(BuildContext context) {
     return RawMaterialButton(
       onPressed: () {
-        setGlobalType(type);
+        setGlobalType!(type);
       },
       child: ListTile(
         title: Text(
           Run.getTypeTitle(type),
           style: TextStyle(color: Colors.white),),
-        leading: Radio<RunType>(
+        leading: Radio<RunType?>(
           value: type,
           activeColor: Colors.white,
           groupValue: globalType,
           focusColor: Colors.white,
-          onChanged: (RunType value) {
+          onChanged: (RunType? value) {
             globalType = value;
-            setGlobalType(value);
+            setGlobalType!(value);
           },
         ),
       ),
@@ -108,8 +108,8 @@ class BasicDateTimeField extends StatefulWidget {
 
   BasicDateTimeField({this.value, this.setValue});
 
-  DateTime value;
-  Function setValue;
+  DateTime? value;
+  Function? setValue;
 
   @override
   _BasicDateTimeFieldState createState() => _BasicDateTimeFieldState(
@@ -123,8 +123,8 @@ class _BasicDateTimeFieldState extends State<BasicDateTimeField> {
 
   _BasicDateTimeFieldState({this.value, this.setValue});
 
-  DateTime value;
-  Function setValue;
+  DateTime? value;
+  Function? setValue;
 
   final format = DateFormat("yyyy-MM-dd HH:mm");
 
@@ -169,7 +169,7 @@ class _BasicDateTimeFieldState extends State<BasicDateTimeField> {
             } else {
               value = currentValue;
             }
-            setValue(value);
+            setValue!(value);
             return value;
           },
         ),
@@ -186,10 +186,10 @@ class BasicDurationField extends StatefulWidget {
 
   BasicDurationField({this.value, this.setValue});
 
-  Duration value;
-  Function setValue;
+  Duration? value;
+  Function? setValue;
 
-  _BasicDurationFieldState lastState;
+  _BasicDurationFieldState? lastState;
 
   @override
   _BasicDurationFieldState createState() {
@@ -204,10 +204,10 @@ class _BasicDurationFieldState extends State<BasicDurationField> {
 
   _BasicDurationFieldState({this.duration, this.setValue});
 
-  Duration duration = Duration(minutes: 20);
-  Function setValue;
+  Duration? duration = Duration(minutes: 20);
+  Function? setValue;
 
-  static durationToString(Duration d) {
+  static durationToString(Duration? d) {
     if (d == null) return "";
     int hours = d.inHours % 24;
     int minutes = d.inMinutes % 60;
@@ -221,13 +221,13 @@ class _BasicDurationFieldState extends State<BasicDurationField> {
   Widget build(BuildContext context) {
     return RawMaterialButton(
       onPressed: () async {
-        Duration resultingDuration = await showDurationPicker(
+        var resultingDuration = await showDurationPicker(
           context: context,
-          initialTime: duration,
+          initialTime: (duration != null) ? (duration!) : Duration.zero,
           snapToMins: 1.0,
         );
         if (resultingDuration != null) {
-          setValue(resultingDuration);
+          setValue!(resultingDuration);
           setState(() {
             duration = resultingDuration;
           });

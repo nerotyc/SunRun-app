@@ -15,18 +15,18 @@ class Group {
     this.sum_distance_ebike, this.creator_id
   });
 
-  int id;
-  int creator_id;
-  String name;
-  String description;
-  double score;
-  int run_count;
-  int num_participants;
-  Duration sum_duration;
-  double sum_distance_walk;
-  double sum_distance_run;
-  double sum_distance_bike;
-  double sum_distance_ebike;
+  int? id;
+  int? creator_id;
+  String? name;
+  String? description;
+  double? score;
+  int? run_count;
+  int? num_participants;
+  Duration? sum_duration;
+  double? sum_distance_walk;
+  double? sum_distance_run;
+  double? sum_distance_bike;
+  double? sum_distance_ebike;
 
   String get sumDurationFormatted {
     List<String> hms = sum_duration.toString().split(".").first.split(":");
@@ -37,8 +37,8 @@ class Group {
     try {
       int id = int.parse(json["id"].toString());
       int creatorId = int.parse(json['creator_id'].toString());
-      String name = json['name'];
-      String description = json['description'];
+      String? name = json['name'];
+      String? description = json['description'];
 
       double score = double.parse(json['score'].toString());
       int run_count = int.parse(json['run_count'].toString());
@@ -67,19 +67,19 @@ class Group {
       );
     } on Exception catch(ex) {
       print(ex.toString());
-      return null;
+      throw ex;
     } on Error catch(err) {
       print(err.toString());
-      return null;
+      throw err;
     }
   }
 
-  Map<String, String> toMap() {
-    Map<String, String> map = <String, String> {
+  Map<String, String?> toMap() {
+    Map<String, String?> map = <String, String?> {
       'name': this.name,
     };
 
-    if (description != null && description.isNotEmpty) {
+    if (description != null && description!.isNotEmpty) {
       map.addAll({ 'description': description });
     }
 

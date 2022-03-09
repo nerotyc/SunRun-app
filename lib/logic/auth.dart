@@ -52,7 +52,7 @@ class AuthHandler extends ChangeNotifier {
   /// true: success
   /// LoginResult: failure
   /// UserIdResult: failure
-  Future<dynamic> tryLoginAndStore(String username, String password) async {
+  Future<dynamic> tryLoginAndStore(String? username, String? password) async {
     LoginResult result = await AuthService.login(username, password);
     if(result.type == LoginResultType.SUCCESS) {
 
@@ -76,7 +76,7 @@ class AuthHandler extends ChangeNotifier {
     return result;
   }
 
-  Future<String> logout() async {
+  Future<String?> logout() async {
     var secStorage = FlutterSecureStorage();
     secStorage.delete(key: "access_token");
     secStorage.delete(key: "user_id");
@@ -85,7 +85,7 @@ class AuthHandler extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool get isWaiting {
+  bool? get isWaiting {
     return _currentState.isWaiting;
   }
 
@@ -93,15 +93,15 @@ class AuthHandler extends ChangeNotifier {
     return _currentState.isLoggedIn;
   }
 
-  String get accessToken {
+  String? get accessToken {
     return _currentState.accessToken;
   }
 
-  int get userId {
+  int? get userId {
     return _currentState.userId;
   }
 
-  int get profileId {
+  int? get profileId {
     return _currentState.profileId;
   }
 

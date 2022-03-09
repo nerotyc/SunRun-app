@@ -30,7 +30,7 @@ class _SunRunRootWidgetState extends State<SunRunRootWidget> {
       ],
       child: Consumer<AuthHandler>(
         builder: (ctx, data, child) {
-          if(data.isWaiting) return SrWaitingScreen();
+          if(data.isWaiting!) return SrWaitingScreen();
           if (data.isLoggedIn) return LandingScreen();
           return LoginScreen();
         },

@@ -58,9 +58,9 @@ class _RunListUserScreenState extends State<RunListUserScreen> {
               future: RunApi.runListUser(),
               builder: (context, AsyncSnapshot<RunListUserResult> snap) {
                 if(snap.hasError ||
-                    (snap.hasData && snap.data.type != RunListUserResultType.SUCCESS_200)) {
+                    (snap.hasData && snap.data!.type != RunListUserResultType.SUCCESS_200)) {
                   return SrErrorWidget(
-                    description: snap.data.detail,
+                    description: snap.data!.detail,
                   );
                 }
 
@@ -68,8 +68,8 @@ class _RunListUserScreenState extends State<RunListUserScreen> {
                   return SrWaitingWidget();
                 }
 
-                if(snap.hasData && snap.data.type == RunListUserResultType.SUCCESS_200) {
-                  List<Run> runs = snap.data.runs;
+                if(snap.hasData && snap.data!.type == RunListUserResultType.SUCCESS_200) {
+                  List<Run> runs = snap.data!.runs;
 
                   return Container(
                       height: MediaQuery.of(context).size.height * 0.85,
@@ -104,7 +104,7 @@ class RunListCardWidget extends StatefulWidget {
   RunListCardWidget(this.updateList, {this.run});
 
   Function updateList;
-  Run run;
+  Run? run;
 
   @override
   _RunListCardWidgetState createState() => _RunListCardWidgetState(
@@ -118,7 +118,7 @@ class _RunListCardWidgetState extends State<RunListCardWidget> {
   _RunListCardWidgetState(this.updateList, {this.run});
 
   Function updateList;
-  Run run;
+  Run? run;
   bool toggle = false;
 
   @override
@@ -144,9 +144,9 @@ class _RunListCardWidgetState extends State<RunListCardWidget> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Icon(run.typeIconData, color: SunRunColors.djk_heading,),
+                    Icon(run!.typeIconData, color: SunRunColors.djk_heading,),
                     SizedBox(width: 12,),
-                    Text(run.startTimeFormatted,
+                    Text(run!.startTimeFormatted,
                       style: TextStyle(color: SunRunColors.djk_heading, fontSize: 18, fontWeight: FontWeight.bold),),
                   ],
                 ),
@@ -154,13 +154,13 @@ class _RunListCardWidgetState extends State<RunListCardWidget> {
                 Text("Distanz/Höhenmeter: ", style: TextStyle(color: SunRunColors.djk_heading, fontWeight: FontWeight.bold),),
                 Padding(
                   padding: const EdgeInsets.only(left: 12.0),
-                  child: Text(run.distance.toString() + "km / " + run.elevation_gain.toString() + "m", style: TextStyle(color: SunRunColors.djk_heading),),
+                  child: Text(run!.distance.toString() + "km / " + run!.elevation_gain.toString() + "m", style: TextStyle(color: SunRunColors.djk_heading),),
                 ),
                 SizedBox(height: 8,),
                 Row(
                   children: [
                     Text("Dauer: ", style: TextStyle(color: SunRunColors.djk_heading, fontWeight: FontWeight.bold),),
-                    Text(run.durationFormatted, style: TextStyle(color: SunRunColors.djk_heading),),
+                    Text(run!.durationFormatted, style: TextStyle(color: SunRunColors.djk_heading),),
                   ],
                 ),
                 SizedBox(height: 8,),
@@ -186,7 +186,7 @@ class _RunListCardWidgetState extends State<RunListCardWidget> {
                                 onPressed: () async {
                                   await Navigator.push(context, MaterialPageRoute(builder: (context) =>
                                       RunEditScreen(
-                                        runId: run.id,
+                                        runId: run!.id,
                                       )));
                                   print("Refresh...");
                                   updateList();
@@ -201,7 +201,7 @@ class _RunListCardWidgetState extends State<RunListCardWidget> {
                                 onPressed: () async {
                                   await Navigator.push(context, MaterialPageRoute(builder: (context) =>
                                       RunDeleteScreen(
-                                        runId: run.id,
+                                        runId: run!.id,
                                       )));
                                   print("Refresh...");
                                   updateList();

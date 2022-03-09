@@ -14,7 +14,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  bool _checkboxValue = false;
+  bool? _checkboxValue = false;
 
   final double height = window.physicalSize.height;
 
@@ -152,7 +152,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                             Checkbox(
                                                 activeColor:
                                                 SunRunColors.primary,
-                                                onChanged: (bool newValue) =>
+                                                onChanged: (bool? newValue) =>
                                                     setState(() =>
                                                     _checkboxValue =
                                                         newValue),

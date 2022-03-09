@@ -16,14 +16,14 @@ import 'package:sonnen_rennt/structs/run.dart';
 
 class AuthService {
 
-  static Future<LoginResult> login(String username, String password) async {
+  static Future<LoginResult> login(String? username, String? password) async {
     try {
       final response = await http.post(
         Uri.parse('https://run.djk-sonnen.de/api/v1/auth/login/'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
         },
-        body: jsonEncode(<String, String>{
+        body: jsonEncode(<String, String?>{
           'username': username,
           'password': password,
         }),
@@ -37,7 +37,7 @@ class AuthService {
 
       if (response.statusCode == 200) {
         // extract token
-        String accessToken = responseJson['token'];
+        String? accessToken = responseJson['token'];
 
         if(accessToken != null && accessToken.toString().length > 0) {
           print("login successful!");
@@ -50,8 +50,8 @@ class AuthService {
       } else {
         print("Login failed with code " + response.statusCode.toString());
 
-        String usernameError = responseJson['username'];
-        String passwordError = responseJson['password'];
+        String? usernameError = responseJson['username'];
+        String? passwordError = responseJson['password'];
 
         LoginResult result = LoginResult.FORM_ERROR();
 
@@ -63,11 +63,11 @@ class AuthService {
         }
 
         if (result.usernameError == null && result.passwordError == null) {
-          List nonFieldErrors = responseJson['non_field_errors'];
+          List? nonFieldErrors = responseJson['non_field_errors'];
           var errorDetail = responseJson['detail'];
 
           if((nonFieldErrors ?? []).length > 0) {
-            if(nonFieldErrors[0] == "Unable to log in with provided credentials.") {
+            if(nonFieldErrors![0] == "Unable to log in with provided credentials.") {
               result.passwordError = "Zugangsdaten inkorrekt!";
             } else {
               result.text = nonFieldErrors[0].toString();
@@ -99,8 +99,8 @@ class AuthService {
     }
   }
 
-  static Future<UserIdResult> fetchUserId({String accessToken}) async {
-    String token = accessToken;
+  static Future<UserIdResult> fetchUserId({String? accessToken}) async {
+    String? token = accessToken;
     if(token == null) token = authHandler.accessToken;
     if(token == null) throw Error();
 
@@ -122,8 +122,8 @@ class AuthService {
 
       if (response.statusCode == 200) {
         // extract token
-        int userId = responseJson['user_id'];
-        int profileId = responseJson['profile_id'];
+        int? userId = responseJson['user_id'];
+        int? profileId = responseJson['profile_id'];
 
         if (userId != null && profileId != null) {
           print("Fetching user_id successful!");
@@ -160,7 +160,7 @@ class AuthService {
   }
 
   static Future<TestTokenResult> testToken() async {
-    String token = authHandler.accessToken;
+    String? token = authHandler.accessToken;
     if(token == null) throw Error();
 
     try {
@@ -206,8 +206,8 @@ class AuthService {
 
 class RunApi {
 
-  static Future<RunDetailResult> runDetail(int runId) async {
-    String token = authHandler.accessToken;
+  static Future<RunDetailResult> runDetail(int? runId) async {
+    String token = authHandler.accessToken!;
 
     try {
       final response = await http.get(
@@ -260,7 +260,7 @@ class RunApi {
   }
 
   static Future<RunCreateResult> runCreate(Run run) async {
-    String token = authHandler.accessToken;
+    String token = authHandler.accessToken!;
 
     try {
       final response = await http.post(
@@ -320,7 +320,7 @@ class RunApi {
   }
 
   static Future<RunEditResult> runEdit(Run run) async {
-    String token = authHandler.accessToken;
+    String token = authHandler.accessToken!;
 
     try {
       final response = await http.put(
@@ -380,8 +380,8 @@ class RunApi {
     }
   }
 
-  static Future<RunDeleteResult> runDelete(int runId) async {
-    String token = authHandler.accessToken;
+  static Future<RunDeleteResult> runDelete(int? runId) async {
+    String token = authHandler.accessToken!;
 
     try {
       final response = await http.delete(
@@ -435,7 +435,7 @@ class RunApi {
   }
 
   static Future<RunListUserResult> runListUser() async {
-    String token = authHandler.accessToken;
+    String token = authHandler.accessToken!;
 
     try {
       final response = await http.get(
@@ -494,7 +494,7 @@ class RunApi {
 class RouteApi {
 
   static Future<RouteDetailResult> routeDetail(int routeId) async {
-    String token = authHandler.accessToken;
+    String token = authHandler.accessToken!;
 
     try {
       final response = await http.get(
@@ -549,7 +549,7 @@ class RouteApi {
   }
 
   static Future<RouteCreateResult> routeCreate(DJKRoute route) async {
-    String token = authHandler.accessToken;
+    String token = authHandler.accessToken!;
 
     try {
       final response = await http.post(
@@ -611,7 +611,7 @@ class RouteApi {
   }
 
   static Future<RouteEditResult> routeEdit(DJKRoute route) async {
-    String token = authHandler.accessToken;
+    String token = authHandler.accessToken!;
 
     try {
       final response = await http.put(
@@ -674,7 +674,7 @@ class RouteApi {
   }
 
   static Future<RouteDeleteResult> routeDelete(int runId) async {
-    String token = authHandler.accessToken;
+    String token = authHandler.accessToken!;
 
     try {
       final response = await http.delete(
@@ -728,7 +728,7 @@ class RouteApi {
   }
 
   static Future<RouteListResult> routeListUser() async {
-    String token = authHandler.accessToken;
+    String token = authHandler.accessToken!;
 
     try {
       final response = await http.get(
@@ -783,7 +783,7 @@ class RouteApi {
   }
 
   static Future<RouteListResult> routeList() async {
-    String token = authHandler.accessToken;
+    String token = authHandler.accessToken!;
 
     try {
       final response = await http.get(
@@ -842,7 +842,7 @@ class RouteApi {
 class GroupApi {
 
   static Future<GroupDetailResult> groupDetail(int groupId) async {
-    String token = authHandler.accessToken;
+    String token = authHandler.accessToken!;
 
     try {
       final response = await http.get(
@@ -897,7 +897,7 @@ class GroupApi {
   }
 
   static Future<GroupCreateResult> groupCreate(Group group) async {
-    String token = authHandler.accessToken;
+    String token = authHandler.accessToken!;
 
     try {
       final response = await http.post(
@@ -959,7 +959,7 @@ class GroupApi {
   }
 
   static Future<GroupEditResult> groupEdit(Group group) async {
-    String token = authHandler.accessToken;
+    String token = authHandler.accessToken!;
 
     try {
       final response = await http.put(
@@ -1022,7 +1022,7 @@ class GroupApi {
   }
 
   static Future<GroupDeleteResult> groupDelete(int groupId) async {
-    String token = authHandler.accessToken;
+    String token = authHandler.accessToken!;
 
     try {
       final response = await http.delete(
@@ -1076,7 +1076,7 @@ class GroupApi {
   }
 
   static Future<GroupListResult> groupListUser() async {
-    String token = authHandler.accessToken;
+    String token = authHandler.accessToken!;
 
     try {
       final response = await http.get(
@@ -1131,7 +1131,7 @@ class GroupApi {
   }
 
   static Future<GroupListResult> groupList() async {
-    String token = authHandler.accessToken;
+    String token = authHandler.accessToken!;
 
     try {
       final response = await http.get(

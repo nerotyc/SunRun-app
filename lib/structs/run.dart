@@ -16,16 +16,16 @@ class Run {
     this.group_id, this.route_id, this.elevation_gain,
   });
 
-  int id;
-  int creator_id;
-  double distance;
-  DateTime time_start;
-  Duration duration;
-  RunType type;
-  String note;
-  int group_id;
-  int route_id;
-  double elevation_gain;
+  int? id;
+  int? creator_id;
+  double? distance;
+  DateTime? time_start;
+  Duration? duration;
+  RunType? type;
+  String? note;
+  int? group_id;
+  int? route_id;
+  double? elevation_gain;
 
   Map<String, String> toMap() {
     Map<String, String> map = <String, String> {
@@ -33,18 +33,18 @@ class Run {
       'elevation_gain': elevation_gain.toString(),
       'type': stringType(type),
       'time_start': time_start.toString().replaceAll("Z", ""),
-      'duration': duration.inMicroseconds.toString(),
+      'duration': duration!.inMicroseconds.toString(),
     };
 
-    if (note != null && note.isNotEmpty) {
+    if (note != null && note!.isNotEmpty) {
       map.addAll({ 'note': note.toString() });
     }
 
-    if (route_id != null && route_id > 0) {
+    if (route_id != null && route_id! > 0) {
       map.addAll({ 'route_id': route_id.toString() });
     }
 
-    if (group_id != null && group_id > 0) {
+    if (group_id != null && group_id! > 0) {
       map.addAll({ 'group_id': group_id.toString() });
     }
 
@@ -64,7 +64,7 @@ class Run {
       var split1 = durationStr.split(".");
 
       int length = split1.length;
-      if (length <= 0) return null;
+      if (length <= 0) throw "Parsing duration not possible";
 
       var split2 = split1.first.split(":");
       int hours = int.parse(split2.first);
@@ -82,14 +82,14 @@ class Run {
       );
       RunType type = parseType(json['type']);
       String note = (json['note'] ?? "").toString();
-      int routeId;
+      int? routeId;
       if (json['route_id'] == null || json['route_id'].toString() == "null") {
         routeId = null;
       } else {
         routeId = int.parse(json['route_id'].toString());
       }
 
-      int groupId;
+      int? groupId;
       if (json['group_id'] == null || json['group_id'].toString() == "null") {
         groupId = null;
       } else {
@@ -103,10 +103,10 @@ class Run {
       );
     } on Exception catch(ex) {
       print(ex.toString());
-      return null;
+      throw ex;
     } on Error catch(err) {
       print(err.toString());
-      return null;
+      throw err;
     }
   }
 
@@ -126,12 +126,12 @@ class Run {
   }
 
   String get startTimeFormatted {
-    return _twoDigit(time_start.day) + "-"
-        + _twoDigit(time_start.month) + "-"
-        + _twoDigit(time_start.year) + " "
-        + _twoDigit( time_start.hour) + ":"
-        + _twoDigit(time_start.minute) + ":"
-        + _twoDigit(time_start.second);
+    return _twoDigit(time_start!.day) + "-"
+        + _twoDigit(time_start!.month) + "-"
+        + _twoDigit(time_start!.year) + " "
+        + _twoDigit( time_start!.hour) + ":"
+        + _twoDigit(time_start!.minute) + ":"
+        + _twoDigit(time_start!.second);
   }
 
   String get durationFormatted {
@@ -204,24 +204,24 @@ class Run {
     return RunType.RUN;
   }
 
-  static String stringType(RunType type) {
+  static String stringType(RunType? type) {
     switch (type) {
       case RunType.WALK: return "WALK";
       case RunType.RUN: return "RUN";
       case RunType.BIKE: return "BIKE";
       case RunType.E_BIKE: return "E-BIKE";
+      default: return "RUN";
     }
-    return "RUN";
   }
 
-  static String getTypeTitle(RunType type) {
+  static String getTypeTitle(RunType? type) {
     switch (type) {
       case RunType.WALK: return "Gehen/Walken";
       case RunType.RUN: return "Laufen";
       case RunType.BIKE: return "Rad";
       case RunType.E_BIKE: return "E-Bike";
+      default: return "Laufen";
     }
-    return "Laufen";
   }
 
 }

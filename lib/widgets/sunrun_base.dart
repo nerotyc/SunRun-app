@@ -17,7 +17,7 @@ class SunRunBaseWidget extends StatefulWidget {
       : super(key: UniqueKey());
 
   String title;
-  Widget child;
+  Widget? child;
   final bool rootRoute;
 
   @override
@@ -34,11 +34,11 @@ class _SunRunBaseWidgetState extends State<SunRunBaseWidget> {
     _scaffoldKey = new GlobalKey<ScaffoldState>();
   }
 
-  String title;
-  Widget child;
-  final bool rootRoute;
+  String? title;
+  Widget? child;
+  final bool? rootRoute;
 
-  GlobalKey<ScaffoldState> _scaffoldKey;
+  GlobalKey<ScaffoldState>? _scaffoldKey;
 
   void popWhilePossiblePushNewScreen(Widget screen) {
     while(Navigator.of(context).canPop())
@@ -62,7 +62,7 @@ class _SunRunBaseWidgetState extends State<SunRunBaseWidget> {
       ],
       child: Consumer<AuthHandler>(
         builder: (ctx, data, cld) {
-          if(data.isWaiting) return SrWaitingScreen();
+          if(data.isWaiting!) return SrWaitingScreen();
           if (!data.isLoggedIn) {
             while(Navigator.of(context).canPop())
               Navigator.of(context).pop();
@@ -89,7 +89,7 @@ class _SunRunBaseWidgetState extends State<SunRunBaseWidget> {
                 IconButton(
                     icon: Icon(Icons.menu, color: SunRunColors.djk_heading,),
                     onPressed: (){
-                      _scaffoldKey.currentState.openDrawer();
+                      _scaffoldKey!.currentState!.openDrawer();
                     }
                 )
               ],
@@ -97,7 +97,7 @@ class _SunRunBaseWidgetState extends State<SunRunBaseWidget> {
               backgroundColor: SunRunColors.djk_bg_darker,
               // backgroundColor: Colors.deepOrangeAccent,
               automaticallyImplyLeading: Navigator.of(context).canPop(),
-              title: Text(title, style: TextStyle(color: SunRunColors.djk_heading),),
+              title: Text(title!, style: TextStyle(color: SunRunColors.djk_heading),),
               elevation: 0,
             ),
             drawer: Drawer(
@@ -124,7 +124,7 @@ class _SunRunBaseWidgetState extends State<SunRunBaseWidget> {
                             alignment: Alignment.topRight,
                             child: IconButton(
                                 onPressed: (){
-                                  _scaffoldKey.currentState.openEndDrawer();
+                                  _scaffoldKey!.currentState!.openEndDrawer();
                                 },
                                 icon: Icon(Icons.close, color: SunRunColors.djk_heading,)
                             ),

@@ -53,7 +53,7 @@ class SrNotificationBaseWidget extends StatelessWidget {
   });
 
   final String title;
-  final String description;
+  final String? description;
   final SrNotificationWidgetSize size;
   final IconData icon;
   final Color iconColor;
@@ -73,7 +73,7 @@ class SrNotificationBaseWidget extends StatelessWidget {
               fontSize: SrNotificationSizeHelper.getTitleSize(size)),
           ),
           SizedBox(height: 10,),
-          Text(description, style: TextStyle(
+          Text(description!, style: TextStyle(
               fontSize: SrNotificationSizeHelper.getTextSize(size)),
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.05,),

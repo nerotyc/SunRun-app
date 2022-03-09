@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:sonnen_rennt/constants/color.dart';
 
 class Input extends StatelessWidget {
-  final String placeholder;
-  final Widget suffixIcon;
-  final Widget prefixIcon;
-  final Function onTap;
-  final Function onChanged;
-  final TextEditingController controller;
+  final String? placeholder;
+  final Widget? suffixIcon;
+  final Widget? prefixIcon;
+  final Function? onTap;
+  final Function? onChanged;
+  final TextEditingController? controller;
   final bool autofocus;
   final Color borderColor;
 
@@ -25,8 +25,8 @@ class Input extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
         cursorColor: SunRunColors.muted,
-        onTap: onTap,
-        onChanged: onChanged,
+        onTap: onTap as void Function()?,
+        onChanged: onChanged as void Function(String)?,
         controller: controller,
         autofocus: autofocus,
         style: TextStyle(height: 0.55, fontSize: 13.0, color: SunRunColors.time),

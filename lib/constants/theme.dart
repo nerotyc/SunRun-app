@@ -5,17 +5,18 @@ import 'package:sonnen_rennt/constants/color.dart';
 
 ThemeData sunRunThemeBasic() {
   TextTheme _basicTextTheme(TextTheme base) {
-    return base.copyWith(
-      headline: base.headline.copyWith(
+    return base;
+    /* return base.copyWith(
+      headline1: base.headline1?.copyWith(
         fontFamily: "Roboto",
         fontSize: 22.0,
         color: Colors.white
       ),
-      title: base.title.copyWith(
+      titleLarge: base.titleLarge?.copyWith(
         fontFamily: "Roboto",
         color: Colors.white,
       ),
-    );
+    ); */
   }
 
   final ThemeData dark = ThemeData.dark();

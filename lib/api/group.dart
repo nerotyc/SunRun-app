@@ -40,10 +40,10 @@ class GroupDetailResult {
     this.group = group;
   }
 
-  GroupDetailResultType type;
-  String detail;
+  GroupDetailResultType? type;
+  String? detail;
 
-  Group group;
+  Group? group;
 }
 
 enum GroupCreateResultType {
@@ -79,7 +79,7 @@ class GroupCreateResult {
     this.detail = detail;
   }
 
-  GroupCreateResult.NOT_FOUND_404({ String detail = "Nicht gefunden!" }) {
+  GroupCreateResult.NOT_FOUND_404({ String? detail = "Nicht gefunden!" }) {
     type = GroupCreateResultType.NOT_FOUND_404;
     this.detail = detail;
   }
@@ -89,11 +89,11 @@ class GroupCreateResult {
     this.id = groupId;
   }
 
-  GroupCreateResultType type;
-  String code;
-  String detail;
+  GroupCreateResultType? type;
+  String? code;
+  String? detail;
 
-  int id;
+  int? id;
 }
 
 enum GroupEditResultType {
@@ -129,7 +129,7 @@ class GroupEditResult {
     this.detail = detail;
   }
 
-  GroupEditResult.NOT_FOUND_404({ String detail = "Nicht gefunden!" }) {
+  GroupEditResult.NOT_FOUND_404({ String? detail = "Nicht gefunden!" }) {
     type = GroupEditResultType.NOT_FOUND_404;
     this.detail = detail;
   }
@@ -139,11 +139,11 @@ class GroupEditResult {
     this.id = groupIds;
   }
 
-  GroupEditResultType type;
-  String code;
-  String detail;
+  GroupEditResultType? type;
+  String? code;
+  String? detail;
 
-  int id;
+  int? id;
 }
 
 enum GroupDeleteResultType {
@@ -173,7 +173,7 @@ class GroupDeleteResult {
     this.detail = detail;
   }
 
-  GroupDeleteResult.NOT_FOUND_404({ String detail = "Nicht gefunden!" }) {
+  GroupDeleteResult.NOT_FOUND_404({ String? detail = "Nicht gefunden!" }) {
     type = GroupDeleteResultType.NOT_FOUND_404;
     this.detail = detail;
   }
@@ -182,9 +182,9 @@ class GroupDeleteResult {
     type = GroupDeleteResultType.SUCCESS_200;
   }
 
-  GroupDeleteResultType type;
-  String code;
-  String detail;
+  GroupDeleteResultType? type;
+  String? code;
+  String? detail;
 }
 
 enum GroupListResultType {
@@ -218,9 +218,9 @@ class GroupListResult {
     this.groups = groups;
   }
 
-  GroupListResultType type;
-  String code;
-  String detail;
+  GroupListResultType? type;
+  String? code;
+  String? detail;
 
-  List<Group> groups;
+  late List<Group> groups;
 }

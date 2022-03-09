@@ -27,13 +27,13 @@ class _RouteCreateScreenState extends State<RouteCreateScreen> {
   String _distanceStr = "";
   String _elevationGainStr = "";
   double _distance = 0, _elevationGain = 0;
-  String _link = null;
-  String _description = null;
+  String? _link = null;
+  String? _description = null;
 
   bool _waiting = false;
-  StreamController _streamController;
-  StreamSink _streamSink;
-  Stream _streamOut;
+  late StreamController _streamController;
+  late StreamSink _streamSink;
+  Stream? _streamOut;
 
   void _clickCreate() async {
     if(_waiting) return;
@@ -41,13 +41,7 @@ class _RouteCreateScreenState extends State<RouteCreateScreen> {
     _waiting = true;
     _streamSink.add(true);
 
-    if (_formKey.currentState.validate()) {
-
-      print("_title: " + _title);
-      print("_distance: " + _distance.toString());
-      print("_elevationGain: " + _elevationGain.toString());
-      print("_link: " + _link);
-      print("_description: " + _description);
+    if (_formKey.currentState!.validate()) {
 
       DJKRoute route = DJKRoute.createNew(
         title: _title,
@@ -65,7 +59,7 @@ class _RouteCreateScreenState extends State<RouteCreateScreen> {
         print("Created route!");
       } else {
         final snackBar = SnackBar(
-            content: Text("Error: " + res.detail,
+            content: Text("Error: " + res.detail!,
               style: TextStyle(color: Colors.white)
             ),
         );
@@ -164,7 +158,6 @@ class _RouteCreateScreenState extends State<RouteCreateScreen> {
                         _distance = 0;
                       }
                       _distanceStr = _distance.toString();
-                      return value;
                     },
                     validator: (value) {
                       if (value == null || value.isEmpty) {

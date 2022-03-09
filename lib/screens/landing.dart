@@ -13,7 +13,7 @@ class LandingScreen extends StatefulWidget {
 
   LandingScreen({this.refreshAuthStatusCallback});
 
-  Function refreshAuthStatusCallback = (){};
+  Function? refreshAuthStatusCallback = (){};
 
   @override
   _LandingScreenState createState() => _LandingScreenState(
@@ -25,7 +25,7 @@ class _LandingScreenState extends State<LandingScreen> {
 
   _LandingScreenState({this.refreshAuthStatusCallback});
 
-  Function refreshAuthStatusCallback = (){};
+  Function? refreshAuthStatusCallback = (){};
 
   void initState() {
     super.initState();

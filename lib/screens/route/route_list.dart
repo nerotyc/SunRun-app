@@ -30,12 +30,12 @@ class _RouteListScreenState extends State<RouteListScreen> {
 
   _RouteListScreenState({this.onlyLoggedInUsers});
 
-  bool onlyLoggedInUsers = true;
+  bool? onlyLoggedInUsers = true;
 
   @override
   Widget build(BuildContext context) {
     return SunRunBaseWidget(
-        title: onlyLoggedInUsers ? "Meine Routen" : "Alle Routen",
+        title: onlyLoggedInUsers! ? "Meine Routen" : "Alle Routen",
         child: Column(
           children: [
             Padding(
@@ -52,15 +52,14 @@ class _RouteListScreenState extends State<RouteListScreen> {
             ),
             SizedBox(height: 14,),
             FutureBuilder(
-              future: onlyLoggedInUsers
+              future: onlyLoggedInUsers!
                   ? RouteApi.routeListUser()
                   : RouteApi.routeList(),
-              builder: (context, snap) {
-                if(snap.hasError ||
-                    (snap.hasData &&
-                        snap.data.type != RouteListResultType.SUCCESS_200)) {
+              builder: (context, AsyncSnapshot<RouteListResult> snap) {
+                if(snap.hasError || (snap.hasData && snap.data != null
+                    && snap.data!.type != RouteListResultType.SUCCESS_200)) {
                   return SrErrorWidget(
-                    description: snap.data.detail,
+                    description: snap.data!.detail,
                   );
                 }
 
@@ -69,8 +68,8 @@ class _RouteListScreenState extends State<RouteListScreen> {
                 }
 
                 if(snap.hasData &&
-                    snap.data.type == RouteListResultType.SUCCESS_200) {
-                  RouteListResult res = snap.data;
+                    snap.data!.type == RouteListResultType.SUCCESS_200) {
+                  RouteListResult res = snap.data!;
                   List<DJKRoute> routes = res.routes;
 
                   return Container(
@@ -104,8 +103,8 @@ class RouteListCardWidget extends StatefulWidget {
 
   RouteListCardWidget({this.route, this.onlyLoggedInUsers});
 
-  DJKRoute route;
-  bool onlyLoggedInUsers = true;
+  DJKRoute? route;
+  bool? onlyLoggedInUsers = true;
 
   @override
   _RouteListCardWidgetState createState() =>
@@ -119,8 +118,8 @@ class _RouteListCardWidgetState extends State<RouteListCardWidget> {
 
   _RouteListCardWidgetState({this.route, this.onlyLoggedInUsers});
 
-  DJKRoute route;
-  bool onlyLoggedInUsers = true;
+  DJKRoute? route;
+  bool? onlyLoggedInUsers = true;
 
   bool toggle = false;
 
@@ -148,7 +147,7 @@ class _RouteListCardWidgetState extends State<RouteListCardWidget> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Flexible(
-                        child: Text(route.title,
+                        child: Text(route!.title!,
                           style: TextStyle(color: SunRunColors.djk_heading, fontSize: 18, fontWeight: FontWeight.bold),),
                     ),
                   ],
@@ -176,20 +175,20 @@ class _RouteListCardWidgetState extends State<RouteListCardWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text("Distanz/Höhenmeter: ", style: TextStyle(color: SunRunColors.djk_heading, fontWeight: FontWeight.bold),),
-                    Text(route.distance.toString() + "km / " + route.elevationGain.toString() + "m", style: TextStyle(color: SunRunColors.djk_heading),),
+                    Text(route!.distance.toString() + "km / " + route!.elevationGain.toString() + "m", style: TextStyle(color: SunRunColors.djk_heading),),
                   ],
                 ),
                 SizedBox(height: 8,),
                 Builder(
                   builder: (context) {
-                    if (route.link != null && route.link.length > 0) {
+                    if (route!.link != null && route!.link!.length > 0) {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text("Link: ", style: TextStyle(color: SunRunColors.djk_heading, fontWeight: FontWeight.bold),),
                           InkWell(
-                              child: Text(route.link, style: TextStyle(color: SunRunColors.primary,)),
-                              onTap: () => launch(route.link)
+                              child: Text(route!.link!, style: TextStyle(color: SunRunColors.primary,)),
+                              onTap: () => launch(route!.link!)
                           ),
                         ],
                       );
@@ -202,7 +201,7 @@ class _RouteListCardWidgetState extends State<RouteListCardWidget> {
                   builder: (context) {
                     // TODO tools
                     if (toggle) {
-                      if (route.description != null && route.description.length > 0) {
+                      if (route!.description != null && route!.description!.length > 0) {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -212,7 +211,7 @@ class _RouteListCardWidgetState extends State<RouteListCardWidget> {
                             SizedBox(height: 8,),
                             Container(
                               width: MediaQuery.of(context).size.width * 0.75,
-                              child: Text(route.description, style: TextStyle(color: SunRunColors.djk_heading), maxLines: 10,),
+                              child: Text(route!.description!, style: TextStyle(color: SunRunColors.djk_heading), maxLines: 10,),
                             )
                           ],
                         );

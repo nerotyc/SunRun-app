@@ -10,11 +10,11 @@ class AuthState {
     this.profileId,
   });
 
-  bool isWaiting = true;
+  bool? isWaiting = true;
 
-  String accessToken;
-  int userId;
-  int profileId;
+  String? accessToken;
+  int? userId;
+  int? profileId;
 
   factory AuthState.waiting() {
     return AuthState._(
@@ -38,10 +38,10 @@ class AuthState {
   }
 
   bool get isLoggedIn {
-    if(isWaiting) return false;
-    return ((accessToken != null) && (accessToken.length > 0))
-        && ((userId != null) && (userId > 0))
-        && ((profileId != null) && (profileId > 0));
+    if(isWaiting!) return false;
+    return ((accessToken != null) && (accessToken!.length > 0))
+        && ((userId != null) && (userId! > 0))
+        && ((profileId != null) && (profileId! > 0));
   }
 
 }
@@ -77,12 +77,12 @@ class LoginResult {
     text = "success";
   }
 
-  LoginResultType type;
-  String accessToken;
+  LoginResultType? type;
+  String? accessToken;
 
-  String text;
-  String usernameError = null;
-  String passwordError = null;
+  late String text;
+  String? usernameError = null;
+  String? passwordError = null;
 
 }
 
@@ -118,11 +118,11 @@ class UserIdResult {
     text = "success";
   }
 
-  UserIdResultType type;
-  int userId;
-  int profileId;
+  UserIdResultType? type;
+  int? userId;
+  int? profileId;
 
-  String text;
+  late String text;
 
 }
 
@@ -152,6 +152,6 @@ class TestTokenResult {
     type = TestTokenResultType.SUCCESS;
   }
 
-  TestTokenResultType type;
+  TestTokenResultType? type;
 
 }
