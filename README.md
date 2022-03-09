@@ -9,7 +9,7 @@ Taylored for Android. IOS not implemented, yet.
 
 TODO: playstore entry
 
-------------------
+
 
 ## Related Projects
 ### Django web app & backend
@@ -20,7 +20,7 @@ TODO: playstore entry
 #### [API Docs](http://api-docs.run.djk-sonnen.de/api/v1/ui/): swagger documentation of the api's endpoints.
 #### [GitHub API Project](https://github.com/Nerotyc/SunRun-api)
 
-------------------
+
 
 ## Screenshots
 
