@@ -32,7 +32,9 @@ class Run {
       'distance': distance.toString(),
       'elevation_gain': elevation_gain.toString(),
       'type': stringType(type),
-      'time_start': time_start.toString().replaceAll("Z", ""),
+      'time_start': time_start!=null
+        ? time_start!.toIso8601String()
+        : DateTime.now().toUtc().toIso8601String(),
       'duration': duration!.inMicroseconds.toString(),
     };
 
@@ -52,13 +54,11 @@ class Run {
   }
 
   factory Run.fromJson(Map json) {
-    print("run.fromJson");
-
     try {
       int id = int.parse(json["id"].toString());
       int creatorId = int.parse(json['creator_id'].toString());
       double distance = double.parse(json['distance'].toString());
-      DateTime dateTime = DateTime.parse(json['time_start'].toString());
+      DateTime dateTime = DateTime.parse(json['time_start'].toString()).toLocal();
 
       String durationStr = json['duration'];
       var split1 = durationStr.split(".");
@@ -115,7 +115,7 @@ class Run {
       -1,
       1,
       4.2,
-      DateTime.now(),
+      DateTime.now().toUtc(),
       Duration(hours: 1, minutes: 23, seconds: 54),
       RunType.BIKE,
       "notenotenote",

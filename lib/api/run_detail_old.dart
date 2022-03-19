@@ -25,7 +25,7 @@
 //   print(response.body);
 //
 //   // final response = await http.get(
-//   //   Uri.parse('http://run.djk-sonnen.de/api/v1/run/detail/' + id.toString() + '/'),
+//   //   Uri.parse(api_url + 'run/detail/' + id.toString() + '/'),
 //   //   headers: {
 //   //     HttpHeaders.authorizationHeader: "Token " + token,
 //   //     HttpHeaders.contentTypeHeader: "Content-type: application/json; charset=utf-8",

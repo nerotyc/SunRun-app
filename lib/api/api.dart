@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:sonnen_rennt/api/const.dart';
 import 'package:sonnen_rennt/api/group.dart';
 import 'package:sonnen_rennt/api/route.dart';
 import 'package:sonnen_rennt/api/run.dart';
@@ -18,7 +19,7 @@ class AuthService {
   static Future<LoginResult> login(String? username, String? password) async {
     try {
       final response = await http.post(
-        Uri.parse('https://run.djk-sonnen.de/api/v1/auth/login/'),
+        Uri.parse(api_url + 'auth/login/'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -105,7 +106,7 @@ class AuthService {
 
     try {
       final response = await http.get(
-        Uri.parse('http://run.djk-sonnen.de/api/v1/user/user-id/'),
+        Uri.parse(api_url + 'user/user-id/'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           HttpHeaders.authorizationHeader: "Token " + token,
@@ -164,7 +165,7 @@ class AuthService {
 
     try {
       final response = await http.get(
-        Uri.parse('http://run.djk-sonnen.de/api/v1/user/user-id/'),
+        Uri.parse(api_url + 'user/user-id/'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           HttpHeaders.authorizationHeader: "Token " + token,
@@ -210,7 +211,7 @@ class RunApi {
 
     try {
       final response = await http.get(
-        Uri.parse('http://run.djk-sonnen.de/api/v1/run/' + runId.toString() + '/'),
+        Uri.parse(api_url + 'run/' + runId.toString() + '/'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           HttpHeaders.authorizationHeader: "Token " + token,
@@ -263,7 +264,7 @@ class RunApi {
 
     try {
       final response = await http.post(
-        Uri.parse('http://run.djk-sonnen.de/api/v1/run/create/'),
+        Uri.parse(api_url + 'run/create/'),
         encoding: Encoding.getByName("utf-8"),
         headers: {
           // 'Content-Type': 'application/json; charset=UTF-8',
@@ -323,7 +324,7 @@ class RunApi {
 
     try {
       final response = await http.put(
-        Uri.parse('http://run.djk-sonnen.de/api/v1/run/edit/'
+        Uri.parse(api_url + 'run/edit/'
             + run.id.toString() + '/'),
         encoding: Encoding.getByName("utf-8"),
         headers: {
@@ -384,7 +385,7 @@ class RunApi {
 
     try {
       final response = await http.delete(
-        Uri.parse('http://run.djk-sonnen.de/api/v1/run/delete/'
+        Uri.parse(api_url + 'run/delete/'
             + runId.toString() + '/'),
         headers: {
           // 'Content-Type': 'application/json; charset=UTF-8',
@@ -438,7 +439,7 @@ class RunApi {
 
     try {
       final response = await http.get(
-        Uri.parse('http://run.djk-sonnen.de/api/v1/run/user/'),
+        Uri.parse(api_url + 'run/user/'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           HttpHeaders.authorizationHeader: "Token " + token,
@@ -497,7 +498,7 @@ class RouteApi {
 
     try {
       final response = await http.get(
-        Uri.parse('http://run.djk-sonnen.de/api/v1/route/' + routeId.toString() + '/'),
+        Uri.parse(api_url + 'route/' + routeId.toString() + '/'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           HttpHeaders.authorizationHeader: "Token " + token,
@@ -552,7 +553,7 @@ class RouteApi {
 
     try {
       final response = await http.post(
-        Uri.parse('http://run.djk-sonnen.de/api/v1/route/create/'),
+        Uri.parse(api_url + 'route/create/'),
         encoding: Encoding.getByName("utf-8"),
         headers: {
           // 'Content-Type': 'application/json; charset=UTF-8',
@@ -614,7 +615,7 @@ class RouteApi {
 
     try {
       final response = await http.put(
-        Uri.parse('http://run.djk-sonnen.de/api/v1/route/edit/'
+        Uri.parse(api_url + 'route/edit/'
             + route.id.toString() + '/'),
         encoding: Encoding.getByName("utf-8"),
         headers: {
@@ -677,7 +678,7 @@ class RouteApi {
 
     try {
       final response = await http.delete(
-        Uri.parse('http://run.djk-sonnen.de/api/v1/route/delete/'
+        Uri.parse(api_url + 'route/delete/'
             + runId.toString() + '/'),
         headers: {
           // 'Content-Type': 'application/json; charset=UTF-8',
@@ -731,7 +732,7 @@ class RouteApi {
 
     try {
       final response = await http.get(
-        Uri.parse('http://run.djk-sonnen.de/api/v1/route/user/'),
+        Uri.parse(api_url + 'route/user/'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           HttpHeaders.authorizationHeader: "Token " + token,
@@ -786,7 +787,7 @@ class RouteApi {
 
     try {
       final response = await http.get(
-        Uri.parse('http://run.djk-sonnen.de/api/v1/route/list/'),
+        Uri.parse(api_url + 'route/list/'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           HttpHeaders.authorizationHeader: "Token " + token,
@@ -845,7 +846,7 @@ class GroupApi {
 
     try {
       final response = await http.get(
-        Uri.parse('http://run.djk-sonnen.de/api/v1/group/' +  groupId.toString() + '/'),
+        Uri.parse(api_url + 'group/' +  groupId.toString() + '/'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           HttpHeaders.authorizationHeader: "Token " + token,
@@ -900,7 +901,7 @@ class GroupApi {
 
     try {
       final response = await http.post(
-        Uri.parse('http://run.djk-sonnen.de/api/v1/route/create/'),
+        Uri.parse(api_url + 'route/create/'),
         encoding: Encoding.getByName("utf-8"),
         headers: {
           // 'Content-Type': 'application/json; charset=UTF-8',
@@ -962,7 +963,7 @@ class GroupApi {
 
     try {
       final response = await http.put(
-        Uri.parse('http://run.djk-sonnen.de/api/v1/group/edit/'
+        Uri.parse(api_url + 'group/edit/'
             + group.id.toString() + '/'),
         encoding: Encoding.getByName("utf-8"),
         headers: {
@@ -1025,7 +1026,7 @@ class GroupApi {
 
     try {
       final response = await http.delete(
-        Uri.parse('http://run.djk-sonnen.de/api/v1/group/delete/'
+        Uri.parse(api_url + 'group/delete/'
             + groupId.toString() + '/'),
         headers: {
           // 'Content-Type': 'application/json; charset=UTF-8',
@@ -1079,7 +1080,7 @@ class GroupApi {
 
     try {
       final response = await http.get(
-        Uri.parse('http://run.djk-sonnen.de/api/v1/group/user/'),
+        Uri.parse(api_url + 'group/user/'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           HttpHeaders.authorizationHeader: "Token " + token,
@@ -1134,7 +1135,7 @@ class GroupApi {
 
     try {
       final response = await http.get(
-        Uri.parse('http://run.djk-sonnen.de/api/v1/group/list/'),
+        Uri.parse(api_url + 'group/list/'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           HttpHeaders.authorizationHeader: "Token " + token,

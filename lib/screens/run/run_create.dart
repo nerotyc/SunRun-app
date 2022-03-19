@@ -37,7 +37,7 @@ class _RunCreateScreenState extends State<RunCreateScreen> {
   String? _group_str = null;
   String? _route_str = null;
   Duration _duration = Duration(minutes: 5);
-  DateTime _timeStart = DateTime.now();
+  DateTime _timeStart = DateTime.now().toUtc();
   String _note = "";
 
   bool _waiting = false;
@@ -69,7 +69,7 @@ class _RunCreateScreenState extends State<RunCreateScreen> {
       print("_distance: " + _distance.toString());
       print("_elevation_gain: " + _elevation_gain.toString());
       print("_type: " + _type.toString());
-      print("_time_start: " + _timeStart.toString());
+      print("_time_start: " + _timeStart.toUtc().toIso8601String());
       print("_duration: " + _duration.toString());
       print("_group: " + groupId.toString());
       print("_note: " + _note);
@@ -79,7 +79,7 @@ class _RunCreateScreenState extends State<RunCreateScreen> {
         distance: _distance,
         elevation_gain: _elevation_gain,
         type: _type,
-        time_start: _timeStart,
+        time_start: _timeStart.toUtc(),
         duration: _duration,
         group_id: groupId,
         note: _note,
@@ -361,7 +361,7 @@ class _RunCreateScreenState extends State<RunCreateScreen> {
                               BasicDateTimeField(
                                 value: _timeStart,
                                 setValue: (DateTime dateTime) {
-                                  _timeStart = dateTime;
+                                  _timeStart = dateTime.toUtc();
                                 },
                               ),
                               SizedBox(height: 16,),

@@ -157,13 +157,13 @@ class _BasicDateTimeFieldState extends State<BasicDateTimeField> {
             final date = await showDatePicker(
                 context: context,
                 firstDate: DateTime(2020),
-                initialDate: currentValue ?? DateTime.now(),
+                initialDate: currentValue ?? DateTime.now().toUtc(),
                 lastDate: DateTime(2400));
             if (date != null) {
               final time = await showTimePicker(
                 context: context,
                 initialTime:
-                TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
+                TimeOfDay.fromDateTime(currentValue ?? DateTime.now().toUtc()),
               );
               value = DateTimeField.combine(date, time);
             } else {
