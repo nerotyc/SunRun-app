@@ -48,16 +48,19 @@ android {
     }
 
     signingConfigs {
-        release {
+        releaseAndroidStudio {
             keyAlias keystoreProperties['keyAlias']
             keyPassword keystoreProperties['keyPassword']
-            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : file("keystore.jks")
             storePassword keystoreProperties['storePassword']
         }
     }
     buildTypes {
-        release {
-            signingConfig signingConfigs.release
+        releaseAndroidStudio {
+            signingConfig signingConfigs.releaseAndroidStudio
+        }
+        release { // GitHub
+            signingConfig signingConfigs.debug
         }
     }
 }
