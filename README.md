@@ -9,6 +9,19 @@ Taylored for Android. IOS not implemented, yet.
 
 TODO: playstore entry
 
+
+
+## Related Projects
+### Django web app & backend
+#### Live Version: [SunRun](https://run.djk-sonnen.de)
+#### [GitHub Project](https://github.com/nerotyc/SunRun-webserver)
+
+### SunRun API
+#### [API Docs](http://api-docs.run.djk-sonnen.de/api/v1/ui/): swagger documentation of the api's endpoints.
+#### [GitHub API Project](https://github.com/Nerotyc/SunRun-api)
+
+
+
 ## Screenshots
 
 |  Dashboard  |  Menu  |
